@@ -14,11 +14,12 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const isLoggedIn = true
 
     return (
       <div>
-        {isLoggedIn ? (
+        {
+        isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
             <Redirect to="/home" />
