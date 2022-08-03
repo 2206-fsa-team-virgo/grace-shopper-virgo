@@ -71,7 +71,7 @@ async function seed() {
     return res;
   };
 
-  console.log(await getEmoji());
+  const emojiArray = await getEmoji();
 
   const products = await Promise.all([
     Product.create({
