@@ -33,7 +33,6 @@ export const Home = (props) => {
       <h5>Consistent NYCconversations at the click of a button</h5>
       <button onClick={handleButton}>Shop Now</button>
       <img src='https://hotemoji.com/images/dl/q/shocked-emoji-by-twitter.png'/>
-      {/* Would like to maybe make this a button */}
       {products.map((product) => (
         <div>
           <div>Name: {product.name}</div>
