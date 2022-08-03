@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -10,6 +11,14 @@ label {
   display: block;
 }
 
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1em;
+  flex-wrap: wrap
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
@@ -18,4 +27,29 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.site-header {
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+  background-color: gainsboro;
+}
+
+.site-header_wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* gap: 100px; */
+  flex-wrap: wrap
+}
+
+.logo {
+  height: 100px;
+  /* margin: auto; */
+}
+
+.viewCart {
+  height: 25px;
+  /* background-color: transparent; */
 }
