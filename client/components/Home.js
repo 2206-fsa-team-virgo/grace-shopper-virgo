@@ -20,10 +20,10 @@ const products = [
  * COMPONENT
  */
 export const Home = (props) => {
+  let history = useHistory();
   const { username } = props;
   
   const handleButton = () => {
-    let history = useHistory();
     history.push('/allProducts')
   };
 
