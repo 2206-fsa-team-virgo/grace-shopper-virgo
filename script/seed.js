@@ -4,17 +4,10 @@ const {
   db,
   models: { User, Product },
 } = require("../server/db");
-// const axios = require("axios");
+const axios = require("axios");
 
-// const emojiUrl =
-//   "https://emoji-api.com/emojis?access_key=d114e3a23dc50347b5d784a65d2cc1a7a7382bf4";
-
-// const getEmoji = async () => {
-//   let res = await axios.get(emojiUrl).then(console.log);
-//   return typeof res;
-// };
-
-// getEmoji();
+const emojiUrl =
+  "https://emoji-api.com/emojis?access_key=d114e3a23dc50347b5d784a65d2cc1a7a7382bf4";
 
 /**
  * seed - this function clears the database, updates tables to
@@ -70,6 +63,15 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
+
+  const getEmoji = async () => {
+    let res = await axios.get(emojiUrl);
+    // .then(console.log);
+    // console.log(res.data);
+    return res;
+  };
+
+  console.log(await getEmoji());
 
   const products = await Promise.all([
     Product.create({
