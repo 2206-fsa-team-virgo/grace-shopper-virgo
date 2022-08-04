@@ -22,8 +22,8 @@ export const me = () => async (dispatch) => {
     // what should res be?
     const res = await axios.get("/auth/me", {
       headers: {
-        authorization: token,
-      },
+        authorization: token
+      }
     });
     return dispatch(setAuth(res.data));
   }
@@ -44,7 +44,7 @@ export const logout = () => {
   history.push("/login");
   return {
     type: SET_AUTH,
-    auth: {},
+    auth: {}
   };
 };
 

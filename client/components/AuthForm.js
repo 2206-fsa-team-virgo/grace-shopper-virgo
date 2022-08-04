@@ -61,7 +61,7 @@ const mapLogin = (state) => {
   return {
     name: "login",
     displayName: "Login",
-    error: state.auth.error,
+    error: state.auth.error
   };
 };
 
@@ -69,7 +69,7 @@ const mapSignup = (state) => {
   return {
     name: "signup",
     displayName: "Sign Up",
-    error: state.auth.error,
+    error: state.auth.error
   };
 };
 
@@ -87,7 +87,7 @@ const mapDispatch = (dispatch) => {
       const email = evt.target.email.value;
       const password = evt.target.password.value;
       dispatch(authenticate(email, password, firstName, lastName, formName));
-    },
+    }
   };
 };
 
