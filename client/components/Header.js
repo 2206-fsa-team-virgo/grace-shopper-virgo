@@ -5,8 +5,8 @@ import { SignupPage } from "./AuthPage";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  // const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
-  const isLoggedIn = false;
+  const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
+  // const isLoggedIn = false;
   const dispatch = useDispatch();
   const handleClick = () => {
     return dispatch(logout());
@@ -24,9 +24,12 @@ const Header = () => {
         {/* should we create a shared button? */}
         <nav class="nav">
           {isLoggedIn ? (
-            <button class="logOut" href="#" onClick={handleClick}>
-              Log out
-            </button>
+            <div>
+              <button class="logOut" href="#" onClick={handleClick}>
+                Log out
+              </button>
+              <p> Hi</p>
+            </div>
           ) : (
             <>
               <Link to="/signup">Sign Up</Link>
