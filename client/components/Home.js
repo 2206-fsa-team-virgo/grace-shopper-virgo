@@ -24,7 +24,7 @@ export const Home = (props) => {
   const { username } = props;
   
   const handleButton = () => {
-    history.push('/allProducts')
+    history.push('/products')
   };
 
   return (
