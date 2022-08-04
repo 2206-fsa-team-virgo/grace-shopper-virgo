@@ -16,15 +16,19 @@ class Routes extends Component {
   }
 
   render() {
-    const isLoggedIn = true;
+    const isLoggedIn = false;
 
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
+<<<<<<< HEAD
+            <Route path="/products" component={AllProducts} />
+=======
             <Route path="/products" component={AllProducts}/>
             <Route path="/cart" component={Cart}/>
+>>>>>>> 22e5026422c1713182fd4cbe801a0f738245aa2d
             <Redirect to="/home" />
           </Switch>
         ) : (
