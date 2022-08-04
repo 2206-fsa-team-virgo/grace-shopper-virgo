@@ -12,6 +12,7 @@ const SET_AUTH = "SET_AUTH";
  * ACTION CREATORS
  */
 const setAuth = (auth) => ({ type: SET_AUTH, auth });
+// const _logOut = () => ({ type: SET_AUTH, auth: {} });
 
 /**
  * THUNK CREATORS
@@ -19,7 +20,6 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
   if (token) {
-    // what should res be?
     const res = await axios.get("/auth/me", {
       headers: {
         authorization: token,
@@ -29,19 +29,23 @@ export const me = () => async (dispatch) => {
   }
 };
 
-export const authenticate = (email, password, method) => async (dispatch) => {
-  try {
-    const res = await axios.post(`/auth/${method}`, { email, password });
-    window.localStorage.setItem(TOKEN, res.data.token);
-    dispatch(me());
-  } catch (authError) {
-    return dispatch(setAuth({ error: authError }));
-  }
-};
+export const authenticate =
+  (username, password, method) => async (dispatch) => {
+    try {
+      const res = await axios.post(`/auth/${method}`, { username, password });
+      window.localStorage.setItem(TOKEN, res.data.token);
+      dispatch(me());
+    } catch (authError) {
+      return dispatch(setAuth({ error: authError }));
+    }
+  };
 
 export const logout = () => {
+  // return async (dispatch) => {
   window.localStorage.removeItem(TOKEN);
+  // await axios.get("/logout");
   history.push("/login");
+  // dispatch(_logOut());
   return {
     type: SET_AUTH,
     auth: {},

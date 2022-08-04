@@ -43,7 +43,7 @@ const AuthForm = (props) => {
           <button type="submit">{displayName}</button>
         </div>
         {error && error.response && (
-          <div className="text-red-700"> {error.response.data} </div>
+          <div className="text-red-500"> {error.response.data} </div>
         )}
       </form>
     </div>
