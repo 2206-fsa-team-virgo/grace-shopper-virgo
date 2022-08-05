@@ -1,20 +1,11 @@
-import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import React from "react";
+import { connect } from "react-redux";
+
 
 /**
  * COMPONENT
  */
 export const AllProducts = (props) => {
-  const state = useSelector((state) => state)
-  console.log(state)
-  // useEffect(() => {
-  //   console.log(props)
-  // });
-
-  const propsbutton = () => {
-    console.log(props);
-  };
-
   const saveLocalCart = (item) => {
     let cart;
     if (localStorage.getItem("cart") === null) {
@@ -36,18 +27,19 @@ export const AllProducts = (props) => {
       <button onClick={propsbutton}>Props</button>
       {/* {products.map((product) => {
         const caller = () => {
-          saveLocalCart(product)
-        }
+          saveLocalCart(product);
+        };
         return (
-        <div>
-          <img src={product.img} />
-          <div>Name: {product.name}</div>
-          <div>Price: ${product.price / 100}</div>
-          <button onClick={caller}>Add to cart</button>
-        </div>
-      )})} */}
+          <div>
+            <img src={product.img} />
+            <div>Name: {product.name}</div>
+            <div>Price: ${product.price / 100}</div>
+            <button onClick={caller}>Add to cart</button>
+          </div>
+        );
+      })}
       <div>{/*  Yellow bar with icons here! */}</div>
-    </div>
+    // </div>
   );
 };
 

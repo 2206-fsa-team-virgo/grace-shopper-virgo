@@ -13,34 +13,34 @@ const User = db.define("user", {
     allowNull: false,
     validate: {
       isEmail: true,
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   password: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   firstName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    type: Sequelize.STRING
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true,
+    // },
   },
   lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
+    type: Sequelize.STRING
+    // allowNull: false,
+    // validate: {
+    //   notEmpty: true,
+    // },
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
+    defaultValue: false
+  }
 });
 
 module.exports = User;

@@ -16,15 +16,15 @@ class Routes extends Component {
   }
 
   render() {
-    const isLoggedIn = true;
+    const isLoggedIn = false;
 
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/products" component={AllProducts}/>
-            <Route path="/cart" component={Cart}/>
+            <Route path="/products" component={AllProducts} />
+            <Route path="/cart" component={Cart} />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -46,7 +46,7 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-    isLoggedIn: !!state.auth.id,
+    isLoggedIn: !!state.auth.id
   };
 };
 
@@ -54,7 +54,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
-    },
+    }
   };
 };
 
