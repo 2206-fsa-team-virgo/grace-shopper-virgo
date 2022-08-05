@@ -48,7 +48,7 @@ const SingleProduct = (props) => {
           <h3>{product.desc}</h3>
           <div>
             <img src={product.img} />
-            <div>Price: ${product.price}</div>
+            <div>Price: ${parseFloat(product.price).toFixed(2)}</div>
             <button onClick={caller}>Add to cart</button>
           </div>
         </div>
