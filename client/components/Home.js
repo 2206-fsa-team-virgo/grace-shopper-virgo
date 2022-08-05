@@ -1,18 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-
+import React from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const products = [
   {
-    name: 'happy chat',
+    name: "happy chat",
     price: 0,
-    img: 'http://www.clker.com/cliparts/V/U/s/u/2/a/chat-hi.png'
+    img: "http://www.clker.com/cliparts/V/U/s/u/2/a/chat-hi.png"
   },
   {
-    name: 'awesome chat',
+    name: "awesome chat",
     price: 100,
-    img: 'http://www.clker.com/cliparts/V/U/s/u/2/a/chat-hi.png'
+    img: "http://www.clker.com/cliparts/V/U/s/u/2/a/chat-hi.png"
   }
 ];
 
@@ -22,9 +21,9 @@ const products = [
 export const Home = (props) => {
   let history = useHistory();
   const { username } = props;
-  
+
   const handleButton = () => {
-    history.push('/products')
+    history.push("/products");
   };
 
   return (
@@ -32,7 +31,7 @@ export const Home = (props) => {
       <h3>A new New York</h3>
       <h5>Consistent NYCconversations at the click of a button</h5>
       <button onClick={handleButton}>Shop Now</button>
-      <img src='https://hotemoji.com/images/dl/q/shocked-emoji-by-twitter.png'/>
+      <img src="https://hotemoji.com/images/dl/q/shocked-emoji-by-twitter.png" />
       {products.map((product) => (
         <div>
           <div>Name: {product.name}</div>

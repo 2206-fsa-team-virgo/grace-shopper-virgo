@@ -15,14 +15,14 @@ const AuthPage = (props) => {
 const mapLogin = (state) => {
   return {
     name: "login",
-    displayName: "Login",
+    displayName: "Login"
   };
 };
 
 const mapSignup = (state) => {
   return {
     name: "signup",
-    displayName: "Sign Up",
+    displayName: "Sign Up"
   };
 };
 const mapDispatch = () => {

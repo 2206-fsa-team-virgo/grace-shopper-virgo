@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product, Order },
+  models: { User, Product, Order }
 } = require("../server/db");
 const axios = require("axios");
 
@@ -23,42 +23,42 @@ async function seed() {
       email: "cody@cody.com",
       password: "123",
       firstName: "Cody",
-      lastName: "Davis",
+      lastName: "Davis"
     },
     {
       email: "murphy@irish.com",
       password: "123",
       firstName: "Mike",
-      lastName: "Murphy",
+      lastName: "Murphy"
     },
     {
       email: "evanbarden@gmail.com",
       password: "123",
       firstName: "Evan",
       lastName: "Barden",
-      isAdmin: true,
+      isAdmin: true
     },
     {
       email: "danielyj98@gmail.com",
       password: "123",
       firstName: "Daniel",
       lastName: "Jacobson",
-      isAdmin: true,
+      isAdmin: true
     },
     {
       email: "HarrisonJK@gmail.com",
       password: "123",
       firstName: "Harrison",
       lastName: "JK",
-      isAdmin: true,
+      isAdmin: true
     },
     {
       email: "Kzkevin123@gmail.com",
       password: "123",
       firstName: "Kevin",
       lastName: "Zhang",
-      isAdmin: true,
-    },
+      isAdmin: true
+    }
   ]);
 
   console.log(`seeded ${users.length} users`);
@@ -75,7 +75,7 @@ async function seed() {
     name: emoji.unicodeName,
     price: 2,
     desc: emoji.character,
-    quantity: 10,
+    quantity: 10
   }));
 
   const products = await Product.bulkCreate(productArray);
@@ -99,7 +99,7 @@ async function seed() {
     { status: "active" },
     { status: "closed" },
     { status: "closed" },
-    { status: "closed" },
+    { status: "closed" }
   ]);
 
   console.log(`seeded ${orders.length} orders`);
@@ -154,7 +154,7 @@ async function seed() {
       evan: users[2],
       daniel: users[3],
       harrison: users[4],
-      kevin: users[5],
+      kevin: users[5]
     },
     products: products.length,
     orders: {
@@ -164,8 +164,8 @@ async function seed() {
       order4: orders[3],
       order5: orders[4],
       order6: orders[5],
-      order7: orders[6],
-    },
+      order7: orders[6]
+    }
   };
 }
 
