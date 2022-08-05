@@ -2,11 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-
 export const Cart = (props) => {
   let history = useHistory();
   const { username } = props;
-  
+
   const saveLocalCart = (item) => {
     let cart;
     if (localStorage.getItem("cart") === null) {
@@ -14,8 +13,8 @@ export const Cart = (props) => {
     } else {
       cart = JSON.parse(localStorage.getItem("cart"));
     }
-    cart.push(item)
-    localStorage.setItem("cart", JSON.stringify(cart))
+    cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
   };
 
   return (

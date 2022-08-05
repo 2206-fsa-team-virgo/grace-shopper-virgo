@@ -23,12 +23,8 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-<<<<<<< HEAD
             <Route path="/products" component={AllProducts} />
-=======
-            <Route path="/products" component={AllProducts}/>
-            <Route path="/cart" component={Cart}/>
->>>>>>> 22e5026422c1713182fd4cbe801a0f738245aa2d
+            <Route path="/cart" component={Cart} />
             <Redirect to="/home" />
           </Switch>
         ) : (
@@ -50,7 +46,7 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-    isLoggedIn: !!state.auth.id,
+    isLoggedIn: !!state.auth.id
   };
 };
 
@@ -58,7 +54,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
-    },
+    }
   };
 };
 

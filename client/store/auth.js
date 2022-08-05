@@ -21,8 +21,8 @@ export const me = () => async (dispatch) => {
   if (token) {
     const res = await axios.get("/auth/me", {
       headers: {
-        authorization: token,
-      },
+        authorization: token
+      }
     });
     return dispatch(setAuth(res.data));
   }
@@ -49,7 +49,7 @@ export const logout = () => {
   // dispatch(_logOut());
   return {
     type: SET_AUTH,
-    auth: {},
+    auth: {}
   };
 };
 
