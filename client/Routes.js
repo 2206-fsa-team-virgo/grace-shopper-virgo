@@ -8,6 +8,8 @@ import { Cart } from "./components/Cart";
 import { me } from "./store";
 import { LoginPage, SignupPage } from "./components/AuthPage";
 import Checkout from "./components/CheckoutForm";
+import SingleProduct from "./components/SingleProduct";
+
 /**
  * COMPONENT
  */
@@ -21,21 +23,22 @@ class Routes extends Component {
 
     return (
       <div>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/products" component={AllProducts} />{" "}
-            <Route path="/checkout" component={Checkout} />
-            <Route path="/cart" component={Cart} />
-            <Redirect to="/home" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/signup" component={SignupPage} />
-          </Switch>
-        )}
+        {/* {isLoggedIn ? ( */}
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route path="/products/:productId" component={SingleProduct} />
+          <Route path="/products" component={AllProducts} />{" "}
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/cart" component={Cart} />
+          {/* <Redirect to="/home" /> */}
+        </Switch>
+        {/* ) : ( */}
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/signup" component={SignupPage} />
+        </Switch>
+        {/* )} */}
       </div>
     );
   }
