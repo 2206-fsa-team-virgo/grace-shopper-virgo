@@ -7,6 +7,9 @@ import AllProducts from "./components/AllProducts";
 import { Cart } from "./components/Cart";
 import { me } from "./store";
 import { LoginPage, SignupPage } from "./components/AuthPage";
+import Checkout from "./components/CheckoutForm";
+import SingleProduct from "./components/SingleProduct";
+
 /**
  * COMPONENT
  */
@@ -20,20 +23,22 @@ class Routes extends Component {
 
     return (
       <div>
-        {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/products" component={AllProducts} />
-            <Route path="/cart" component={Cart} />
-            <Redirect to="/home" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/signup" component={SignupPage} />
-          </Switch>
-        )}
+        {/* {isLoggedIn ? ( */}
+        <Switch>
+          <Route path="/home" component={Home} />
+          <Route path="/products/:productId" component={SingleProduct} />
+          <Route path="/products" component={AllProducts} />{" "}
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/cart" component={Cart} />
+          {/* <Redirect to="/home" /> */}
+        </Switch>
+        {/* ) : ( */}
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/signup" component={SignupPage} />
+        </Switch>
+        {/* )} */}
       </div>
     );
   }
@@ -46,7 +51,7 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
   };
 };
 
@@ -54,7 +59,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
-    }
+    },
   };
 };
 
