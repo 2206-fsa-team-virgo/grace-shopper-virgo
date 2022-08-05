@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
-
-// const product = {
-//   name: "happy",
-//   price: 1.99,
-//   img: "http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/smiling-face-with-open-mouth.png",
-// };
+import { fetchProduct } from "../store/singleProduct";
 
 /**
  * COMPONENT -- translating this from AllProducts
  */
-export const SingleProduct = () => {
+const SingleProduct = (props) => {
   const product = useSelector((reduxState) => reduxState.product);
   const dispatch = useDispatch();
+
+  // load the proper product when component mounts
+  useEffect(() => {
+    dispatch(fetchProduct(props.match.params.productId)); // runs axios call
+    console.log("Props-->", props);
+  }, []);
+  // second argument determines if it runs again
+  // If you use an empty array [], it behaves like componentDidMount
+  // you can also pass an array of values such that if they update,
+  // then the useEffect runs again
 
   const saveLocalCart = (item) => {
     let cart;
@@ -35,12 +40,19 @@ export const SingleProduct = () => {
 
   return (
     <div>
-      <h3>{product.name}</h3>
-      <div>
-        <img src={product.img} />
-        <div>Price: ${product.price}</div>
-        <button onClick={caller}>Add to cart</button>
-      </div>
+      {typeof product === "undefined" ? (
+        <p>Loading</p>
+      ) : (
+        <div>
+          <h3>{product.name}</h3>
+          <h3>{product.desc}</h3>
+          <div>
+            <img src={product.img} />
+            <div>Price: ${product.price}</div>
+            <button onClick={caller}>Add to cart</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
