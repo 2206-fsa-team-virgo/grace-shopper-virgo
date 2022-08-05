@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store";
-import { SignupPage } from "./AuthPage";
 import { Link } from "react-router-dom";
 
 const Header = () => {
