@@ -1,20 +1,19 @@
-import React, { useEffect } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
 /**
  * COMPONENT
  */
 export const AllProducts = (props) => {
   const dispatch = useDispatch();
-  dispatch(fetchProducts())
-  
-  // useEffect(() => {
-  //   console.log(props)
-  // });
+  //Grabbing the products from the redux store
+  const products = useSelector((state) => state.products);
 
-  const propsbutton = () => {
-    console.log(props);
-  };
+  //This useEffect hook acts like a 'Component did Mount'
+  useEffect(() => {
+    //Dispatching the proucts to the readux store
+    dispatch(fetchProducts());
+  }, []);
 
   const saveLocalCart = (item) => {
     let cart;
@@ -33,23 +32,32 @@ export const AllProducts = (props) => {
   return (
     <div>
       <h3>Shop Emojis!</h3>
-      {/* <p>First Product:{props.products[0]}</p> */}
       <button onClick={propsbutton}>Props</button>
-      {/* {products.map((product) => {
-        const caller = () => {
-          saveLocalCart(product)
-        }
-        return (
-        <div>
-          <img src={product.img} />
-          <div>Name: {product.name}</div>
-          <div>Price: ${product.price / 100}</div>
-          <button onClick={caller}>Add to cart</button>
-        </div>
-      )})} */}
+      {
+        //This ternary vv checks to see if the component mounted
+        //If it didn't, it will wait to load the data with a 'Loading...' until it does
+        products.length === 0 ? (
+          <p>Loading...</p>
+        ) : (
+          //We're using product.slice for beta since 2.6k is a lot
+          products.slice(0, 100).map((product) => {
+            const caller = () => {
+              saveLocalCart(product);
+            };
+            return (
+              <div key={product.id}>
+                <img src={product.img} />
+                <div>Name: {product.name}</div>
+                <div>Price: ${product.price}</div>
+                <button onClick={caller}>Add to cart</button>
+              </div>
+            );
+          })
+        )
+      }
       <div>{/*  Yellow bar with icons here! */}</div>
     </div>
   );
 };
 
-export default AllProducts
+export default AllProducts;
