@@ -24,6 +24,7 @@ const Header = () => {
         <nav class="nav">
           {isLoggedIn ? (
             <div>
+              <Link to="/checkout">Checkout</Link>
               <button class="logOut" href="#" onClick={handleClick}>
                 Log out
               </button>
