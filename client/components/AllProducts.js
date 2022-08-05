@@ -47,7 +47,7 @@ export const AllProducts = (props) => {
               <div key={product.id}>
                 <img src={product.img} />
                 <div>Name: {product.name}</div>
-                <div>Price: ${product.price}</div>
+                <div>Price: ${parseFloat(product.price).toFixed(2)}</div>
                 <button onClick={caller}>Add to cart</button>
               </div>
             );
