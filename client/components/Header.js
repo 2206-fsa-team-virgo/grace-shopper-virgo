@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store";
-import { SignupPage } from "./AuthPage";
+// import { SignupPage } from "./AuthPage";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -25,6 +25,7 @@ const Header = () => {
         <nav class="nav">
           {isLoggedIn ? (
             <div>
+              <Link to="/checkout">Checkout</Link>
               <button class="logOut" href="#" onClick={handleClick}>
                 Log out
               </button>
