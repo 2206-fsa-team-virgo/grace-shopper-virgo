@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
 /**
@@ -32,14 +32,13 @@ export const AllProducts = (props) => {
   return (
     <div>
       <h3>Shop Emojis!</h3>
-      <button onClick={propsbutton}>Props</button>
       {
         //This ternary vv checks to see if the component mounted
         //If it didn't, it will wait to load the data with a 'Loading...' until it does
         products.length === 0 ? (
           <p>Loading...</p>
         ) : (
-          //We're using product.slice for beta since 2.6k is a lot
+          //We're using product.slice for beta since 2.6k entries is a lot
           products.slice(0, 100).map((product) => {
             const caller = () => {
               saveLocalCart(product);
