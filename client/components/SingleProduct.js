@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { connect, useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../store/singleProduct";
 
 /**
@@ -11,14 +11,11 @@ const SingleProduct = (props) => {
 
   // load the proper product when component mounts
   useEffect(() => {
-    dispatch(fetchProduct(props.match.params.productId)); // runs axios call
+    dispatch(fetchProduct(props.match.params.productId));
     console.log("Props-->", props);
   }, []);
-  // second argument determines if it runs again
-  // If you use an empty array [], it behaves like componentDidMount
-  // you can also pass an array of values such that if they update,
-  // then the useEffect runs again
 
+  // should we consolidate this SaveLocalCart function somewhere?
   const saveLocalCart = (item) => {
     let cart;
     if (localStorage.getItem("cart") === null) {
@@ -49,7 +46,7 @@ const SingleProduct = (props) => {
           <div>
             <img src={product.img} />
             <div>Price: ${parseFloat(product.price).toFixed(2)}</div>
-            <button onClick={caller}>Add to cart</button>
+            <button onClick={() => saveLocalCart(product)}>Add to cart</button>
           </div>
         </div>
       )}
