@@ -80,15 +80,6 @@ async function seed() {
 
   const products = await Product.bulkCreate(productArray);
 
-  // const products = await Promise.all([
-  //   Product.create({
-  //     name: "smiley",
-  //     price: 10.5,
-  //     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  //     quantity: 10,
-  //   }),
-  // ]);
-
   console.log(`seeded ${products.length} products`);
   console.log(`seeded products successfully`);
 
@@ -106,44 +97,48 @@ async function seed() {
   console.log(`seeded orders successfully`);
 
   // associate orders with users
-  await orders[0].setUser(users[0]);
-  await orders[1].setUser(users[1]);
-  await orders[2].setUser(users[2]);
-  await orders[3].setUser(users[3]);
-  await orders[4].setUser(users[1]);
-  await orders[5].setUser(users[4]);
-  await orders[6].setUser(users[5]);
+  const ordersToUsers = await Promise.all([
+    orders[0].setUser(users[0]),
+    orders[1].setUser(users[1]),
+    orders[2].setUser(users[2]),
+    orders[3].setUser(users[3]),
+    orders[4].setUser(users[1]),
+    orders[5].setUser(users[4]),
+    orders[6].setUser(users[5]),
+  ]);
 
   console.log(`added order=>user associations successfully`);
 
   // add some products to orders
-  await products[0].addOrder(orders[0]);
-  await products[1].addOrder(orders[0]);
-  await products[2].addOrder(orders[0]);
+  const productsToOrders = await Promise.all([
+    products[0].addOrder(orders[0]),
+    products[1].addOrder(orders[0]),
+    products[2].addOrder(orders[0]),
 
-  await products[0].addOrder(orders[1]);
-  await products[3].addOrder(orders[1]);
-  await products[4].addOrder(orders[1]);
+    products[0].addOrder(orders[1]),
+    products[3].addOrder(orders[1]),
+    products[4].addOrder(orders[1]),
 
-  await products[5].addOrder(orders[2]);
-  await products[6].addOrder(orders[2]);
-  await products[7].addOrder(orders[2]);
+    products[5].addOrder(orders[2]),
+    products[6].addOrder(orders[2]),
+    products[7].addOrder(orders[2]),
 
-  await products[8].addOrder(orders[3]);
-  await products[6].addOrder(orders[3]);
-  await products[9].addOrder(orders[3]);
+    products[8].addOrder(orders[3]),
+    products[6].addOrder(orders[3]),
+    products[9].addOrder(orders[3]),
 
-  await products[10].addOrder(orders[4]);
-  await products[11].addOrder(orders[4]);
-  await products[12].addOrder(orders[4]);
+    products[10].addOrder(orders[4]),
+    products[11].addOrder(orders[4]),
+    products[12].addOrder(orders[4]),
 
-  await products[12].addOrder(orders[5]);
-  await products[13].addOrder(orders[5]);
-  await products[14].addOrder(orders[5]);
+    products[12].addOrder(orders[5]),
+    products[13].addOrder(orders[5]),
+    products[14].addOrder(orders[5]),
 
-  await products[15].addOrder(orders[6]);
-  await products[16].addOrder(orders[6]);
-  await products[14].addOrder(orders[6]);
+    products[15].addOrder(orders[6]),
+    products[16].addOrder(orders[6]),
+    products[14].addOrder(orders[6]),
+  ]);
 
   console.log(`added order=>product associations successfully`);
 
