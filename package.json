@@ -1,8 +1,11 @@
 {
   "name": "grace-shopper-virgo",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "an amazing e-commerce site",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development",
@@ -20,7 +23,7 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "bcrypt": "^5.0.0",
     "compression": "^1.7.3",
     "express": "^4.16.4",
@@ -34,7 +37,6 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
     "@babel/register": "^7.12.10",
-    "axios": "^0.21.1",
     "axios-mock-adapter": "^1.16.0",
     "babel-loader": "^8.2.2",
     "chai": "^4.2.0",
