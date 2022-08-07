@@ -2,10 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
 import saveLocalCart from "../saveLocalCart";
-import { Link } from 'react-router-dom'
-/**
- * COMPONENT
- */
+import { Link } from "react-router-dom";
+
 export const AllProducts = (props) => {
   const dispatch = useDispatch();
   //Grabbing the products from the redux store
@@ -16,8 +14,6 @@ export const AllProducts = (props) => {
     //Dispatching the proucts to the readux store
     dispatch(fetchProducts());
   }, []);
-
-
 
   return (
     <div>
@@ -36,8 +32,10 @@ export const AllProducts = (props) => {
 
             return (
               <div key={product.id}>
-                <Link to={`/products/${product.id}`}><img src={product.img} /></Link>
-                <Link to={`/products/${product.id}`}>Name: {product.name}</Link>
+                <Link to={`/products/${product.id}`}>
+                  <img src={product.img} />
+                </Link>
+                <Link to={`/products/${product.id}`}>{product.name}</Link>
                 <div>Price: ${parseFloat(product.price).toFixed(2)}</div>
                 <button onClick={caller}>Add to cart</button>
               </div>
