@@ -15,7 +15,7 @@ const Header = () => {
     <header className="site-header">
       <div className="site-header_wrapper">
         {/* <a href=""> */}
-        <Link to="/login">
+        <Link to="/home">
           <img
             className="logo"
             src="https://www.emoji.com/wp-content/uploads/2019/09/emoji_logo_2021.png"
