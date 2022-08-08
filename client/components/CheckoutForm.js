@@ -3,6 +3,13 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const Checkout = () => {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  let totalPrice = 0;
+  //   const handlePrice = (item) => {
+  //     let itemTotal = item.price * item.quantity;
+  //     totalPrice += itemTotal;
+  //     return itemTotal;
+  //   };
   return (
     <div>
       {/* <div className="py-3 bg-warning">
@@ -64,24 +71,24 @@ const Checkout = () => {
           <input
             id="ccn"
             type="tel"
-            inputmode="numeric"
+            inputMode="numeric"
             pattern="[0-9\s]{13,19}"
-            autocomplete="cc-number"
-            maxlength="19"
+            autoComplete="cc-number"
+            maxLength="19"
             placeholder="xxxx xxxx xxxx xxxx"
           />
           <label>Expiration</label>
           <input
-            class="inputCard"
+            className="inputCard"
             name="expiry"
             id="expiry"
             type="month"
             required
           />
           <label>CVC</label>
-          <input type="tel" maxlength="4" />
+          <input type="tel" maxLength="4" />
           <label>Zipcode</label>
-          <input type="text" maxlength="5" />
+          <input type="text" maxLength="5" />
         </div>
         {/* </div> */}
         {/* <div className="col-md-12">
@@ -93,14 +100,51 @@ const Checkout = () => {
         </div>
       </div> */}
         <div className="cart">
-          <table>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Qty</th>
-              <th>Total</th>
-            </tr>
-          </table>
+          <div>
+            {cart.map((item, idx) => {
+              const numPrice = Number(item.numPrice);
+              console.log(item);
+              console.log(idx);
+              return (
+                <div key={idx}>
+                  <p>{item.price}</p>
+                  <p>{item.price * item.quantity}</p>
+                </div>
+              );
+            })}
+          </div>
+          {/* <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.map((item) => {
+                // const numPrice = parseFloat(item.price).toFixed(2)
+                const numPrice = Number(item.price);
+                // totalPrice += numPrice * item.quantity;
+                console.log(typeof numPrice);
+                console.log(item.price * 2);
+
+                return (
+                  <tr key={item.id}>
+                    <td>{item.desc}</td>
+                    {<td>{numPrice}</td>}
+                    {<td>{item.quantity}</td>}
+                    <td>{numPrice * item.quantity}</td>
+                  </tr>
+                );
+              })}
+              <tr>
+                <td>Final Total:</td>
+                <td>{totalPrice}</td>
+              </tr>
+            </tbody>
+          </table> */}
         </div>
       </div>
     </div>
