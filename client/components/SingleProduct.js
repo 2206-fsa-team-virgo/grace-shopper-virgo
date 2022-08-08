@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchProduct } from "../store/singleProduct";
 import saveLocalCart from "../shared/saveLocalCart";
 import EmojiDisplay from "../shared/EmojiDisplay";
+import useRouter from "../shared/useRouter";
 
 /**
  * COMPONENT -- translating this from AllProducts
@@ -10,6 +11,7 @@ import EmojiDisplay from "../shared/EmojiDisplay";
 const SingleProduct = (props) => {
   const product = useSelector((reduxState) => reduxState.product);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   // load the proper product when component mounts
   useEffect(() => {
@@ -27,6 +29,7 @@ const SingleProduct = (props) => {
           <div>
             <div>Price: ${parseFloat(product.price).toFixed(2)}</div>
             <button onClick={() => saveLocalCart(product)}>Add to cart</button>
+            <button onClick={(e) => router.push("/cart")}>View Cart</button>
           </div>
         </div>
       )}
