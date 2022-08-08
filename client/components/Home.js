@@ -1,56 +1,56 @@
-import React from "react";
-import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, Link } from "react-router-dom";
+import { fetchProducts } from "../store/products";
+import EmojiDisplay from "../shared/EmojiDisplay";
 
-const products = [
-  {
-    name: "happy chat",
-    price: 0,
-    img: "http://www.clker.com/cliparts/V/U/s/u/2/a/chat-hi.png"
-  },
-  {
-    name: "awesome chat",
-    price: 100,
-    img: "http://www.clker.com/cliparts/V/U/s/u/2/a/chat-hi.png"
-  }
-];
-
-/**
- * COMPONENT
- */
 export const Home = (props) => {
   let history = useHistory();
-  const { username } = props;
-
+  const dispatch = useDispatch();
+  //Grabbing the products from the redux store
+  const products = useSelector((state) => state.products);
+  
+  useEffect(() => {
+    //Dispatching the proucts to the readux store
+    dispatch(fetchProducts());
+  }, []);
+  
   const handleButton = () => {
     history.push("/products");
   };
 
   return (
     <div>
-      <h3>A new New York</h3>
-      <h5>Consistent NYCconversations at the click of a button</h5>
+      <h3>Emoji Emporium</h3>
+      <h5>The ONLY ecommerce shop {"(probably)"} where you can buy what's already on your phone!</h5>
+      <EmojiDisplay{...products[1080]}/>
       <button onClick={handleButton}>Shop Now</button>
-      <img src="https://hotemoji.com/images/dl/q/shocked-emoji-by-twitter.png" />
-      {products.map((product) => (
-        <div>
-          <div>Name: {product.name}</div>
-          <div>Price: ${product.price}</div>
-          <img src={product.img} />
-        </div>
-      ))}
+      <h5>Featured Products</h5>
       <div>{/*  Yellow bar with icons here! */}</div>
+      {
+        //This ternary vv checks to see if the component mounted
+        //If it didn't, it will wait to load the data with a 'Loading...' until it does
+        products.length === 0 ? (
+          <p>Loading...</p>
+        ) : (
+          //We're using product.slice for beta since 2.6k entries is a lot
+          products.slice(0, 6).map((product) => {
+            return (
+              <div key={product.id}>
+                <Link to={`/products/${product.id}`}>
+                  <EmojiDisplay {...product} />
+                </Link>
+                <Link to={`/products/${product.id}`}>{product.name}</Link>
+                <div>Price: ${parseFloat(product.price).toFixed(2)}</div>
+              </div>
+            );
+          })
+        )
+      }
     </div>
   );
 };
 
-/**
- * CONTAINER
- */
-const mapState = (state) => {
-  return {
-    username: state.auth.username
-  };
-};
 
-export default connect(mapState)(Home);
+
+export default Home
