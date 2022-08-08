@@ -1,21 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { fetchProducts } from "../store/products";
 
 export const Cart = (props) => {
   let history = useHistory();
   const { username } = props;
+  let cart = JSON.parse(localStorage.getItem("cart"));
 
   const saveLocalCart = (item) => {
-    let cart;
-    if (localStorage.getItem("cart") === null) {
-      cart = [];
+    // let cart;
+    // if (localStorage.getItem("cart") === null) {
+    //   cart = [];
+    if (cart.length === 0) {
+      cart.push(item);
     } else {
-      cart = JSON.parse(localStorage.getItem("cart"));
+      let res = cart.find((product) => product.id === item.id);
+      if (res === undefined) {
+        cart.push(item);
+      }
+      // cart = JSON.parse(localStorage.getItem("cart"));
     }
-    cart.push(item);
+    // cart.push(item);
     localStorage.setItem("cart", JSON.stringify(cart));
   };
+
+  const removeItemFromCart = (itemRemoved) => {
+    let temp = cart.filter((item) => item.id != itemRemoved);
+    localStorage.setItem("cart", JSON.stringify(temp));
+  };
+
+  function updateQuantity(item, quantity) {
+    for (let product of cart) {
+      if (item.id === product.id) {
+        item.quantity = quantity;
+      }
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 
   return (
     <div>
