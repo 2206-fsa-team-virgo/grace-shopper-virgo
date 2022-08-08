@@ -16,11 +16,6 @@ const SingleProduct = (props) => {
     console.log("Props-->", props);
   }, []);
 
-
-  const caller = () => {
-    saveLocalCart(product);
-  };
-
   return (
     <div>
       {typeof product === "undefined" ? (
