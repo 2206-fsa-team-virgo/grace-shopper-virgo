@@ -26,10 +26,6 @@ export const AllProducts = (props) => {
         ) : (
           //We're using product.slice for beta since 2.6k entries is a lot
           products.slice(0, 100).map((product) => {
-            const caller = () => {
-              saveLocalCart(product);
-            };
-
             return (
               <div key={product.id}>
                 <Link to={`/products/${product.id}`}>
@@ -37,7 +33,7 @@ export const AllProducts = (props) => {
                 </Link>
                 <Link to={`/products/${product.id}`}>{product.name}</Link>
                 <div>Price: ${parseFloat(product.price).toFixed(2)}</div>
-                <button onClick={caller}>Add to cart</button>
+                <button onClick={() => saveLocalCart(product)}>Add to cart</button>
               </div>
             );
           })
