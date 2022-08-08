@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../store/products";
-import saveLocalCart from "../saveLocalCart";
+import saveLocalCart from "../shared/saveLocalCart";
 import { Link } from "react-router-dom";
+import EmojiDisplay from "../shared/EmojiDisplay";
 
 export const AllProducts = (props) => {
   const dispatch = useDispatch();
@@ -29,11 +30,13 @@ export const AllProducts = (props) => {
             return (
               <div key={product.id}>
                 <Link to={`/products/${product.id}`}>
-                  <img src={product.img} />
+                  <EmojiDisplay {...product} />
                 </Link>
                 <Link to={`/products/${product.id}`}>{product.name}</Link>
                 <div>Price: ${parseFloat(product.price).toFixed(2)}</div>
-                <button onClick={() => saveLocalCart(product)}>Add to cart</button>
+                <button onClick={() => saveLocalCart(product)}>
+                  Add to cart
+                </button>
               </div>
             );
           })
