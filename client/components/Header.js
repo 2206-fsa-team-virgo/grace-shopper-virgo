@@ -15,10 +15,12 @@ const Header = () => {
     <header className="site-header">
       <div className="site-header_wrapper">
         {/* <a href=""> */}
-        <img
-          className="logo"
-          src="https://www.emoji.com/wp-content/uploads/2019/09/emoji_logo_2021.png"
-        />
+        <Link to="/login">
+          <img
+            className="logo"
+            src="https://www.emoji.com/wp-content/uploads/2019/09/emoji_logo_2021.png"
+          />
+        </Link>
         {/* </a> */}
         {/* should we create a shared button? */}
         <nav className="nav">
@@ -36,11 +38,12 @@ const Header = () => {
               <Link to="/login">Login</Link>
             </>
           )}
-
-          <img
-            className="viewCart"
-            src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
-          />
+          <Link to="/cart">
+            <img
+              className="viewCart"
+              src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
+            />
+          </Link>
         </nav>
       </div>
     </header>

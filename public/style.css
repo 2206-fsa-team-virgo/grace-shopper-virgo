@@ -53,3 +53,9 @@ form div {
   height: 25px;
   /* background-color: transparent; */
 }
+
+.cart {
+  display: flex;
+  justify-content: space-between;
+  
+}
