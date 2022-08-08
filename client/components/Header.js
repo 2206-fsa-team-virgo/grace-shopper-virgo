@@ -12,20 +12,20 @@ const Header = () => {
   };
 
   return (
-    <header class="site-header">
-      <div class="site-header_wrapper">
+    <header className="site-header">
+      <div className="site-header_wrapper">
         {/* <a href=""> */}
         <img
-          class="logo"
+          className="logo"
           src="https://www.emoji.com/wp-content/uploads/2019/09/emoji_logo_2021.png"
         />
         {/* </a> */}
         {/* should we create a shared button? */}
-        <nav class="nav">
+        <nav className="nav">
           {isLoggedIn ? (
             <div>
               <Link to="/checkout">Checkout</Link>
-              <button class="logOut" href="#" onClick={handleClick}>
+              <button className="logOut" href="#" onClick={handleClick}>
                 Log out
               </button>
               <p> Hi</p>
@@ -38,7 +38,7 @@ const Header = () => {
           )}
 
           <img
-            class="viewCart"
+            className="viewCart"
             src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
           />
         </nav>
