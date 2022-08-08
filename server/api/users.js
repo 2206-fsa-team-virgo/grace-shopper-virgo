@@ -6,7 +6,6 @@ module.exports = router;
 
 router.get("/", async (req, res, next) => {
   try {
-    
     //if(admin){
     //  const users = await User.findAll()
     //}
@@ -31,6 +30,3 @@ router.get("/:userId", async (req, res, next) => {
     next(err);
   }
 });
-
-
-
