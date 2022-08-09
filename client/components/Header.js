@@ -15,12 +15,13 @@ const Header = () => {
     <header className="site-header">
       <div className="site-header_wrapper">
         {/* <a href=""> */}
-        <Link to="/home">
+        <Link to="/">
           <img
             className="logo"
             src="https://www.emoji.com/wp-content/uploads/2019/09/emoji_logo_2021.png"
           />
         </Link>
+        <Link to="/products">All</Link>
         {/* </a> */}
         {/* should we create a shared button? */}
         <nav className="nav">
