@@ -2,57 +2,45 @@ import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchProducts } from "../store/products";
+import saveLocalCart from "../shared/saveLocalCart";
 
 export const Cart = (props) => {
   let history = useHistory();
   const { username } = props;
   let cart = JSON.parse(localStorage.getItem("cart"));
+  console.log("cart", cart);
 
-  const saveLocalCart = (item) => {
-    // let cart;
-    // if (localStorage.getItem("cart") === null) {
-    //   cart = [];
-    if (cart.length === 0) {
-      cart.push(item);
-    } else {
-      let res = cart.find((product) => product.id === item.id);
-      if (res === undefined) {
-        cart.push(item);
-      }
-      // cart = JSON.parse(localStorage.getItem("cart"));
-    }
-    // cart.push(item);
+  const updateLocalStorageCart = () =>
     localStorage.setItem("cart", JSON.stringify(cart));
+
+  const incrementFromCart = (id) => {
+    cart[id].qty++;
+    updateLocalStorageCart();
   };
 
-  const removeItemFromCart = (itemRemoved) => {
-    let temp = cart.filter((item) => item.id != itemRemoved);
-    localStorage.setItem("cart", JSON.stringify(temp));
+  const decrementFromCart = (id) => {
+    if (cart[id].qty >= 0) {
+      cart[id].qty--;
+    }
+    updateLocalStorageCart();
   };
 
-  function updateQuantity(item, quantity) {
-    for (let product of cart) {
-      if (item.id === product.id) {
-        item.quantity = quantity;
-      }
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
+  const removeItemFromCart = (id) => {
+    delete cart[id];
+    updateLocalStorageCart();
+  };
 
   return (
     <div>
       <h3>A new New York</h3>
-      <button onClick={saveLocalCart("Happy Emoji")}>Shop Now</button>
-      {/* <h5>Consistent NYCconversations at the click of a button</h5>
-      <img src="https://hotemoji.com/images/dl/q/shocked-emoji-by-twitter.png" />
-      {products.map((product) => (
+      <button onClick={() => updateLocalStorageCart}>Refresh Cart</button>
+      {/* {products.map((product) => (
         <div>
           <div>Name: {product.name}</div>
           <div>Price: ${product.price}</div>
           <img src={product.img} />
         </div>
-      ))}
-      <div> Yellow bar with icons here!</div> */}
+      ))} */}
     </div>
   );
 };
