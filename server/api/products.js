@@ -37,6 +37,8 @@ router.post("/", requireToken, async (req, res, next) => {
   try {
     if (req.user.isAdmin) {
       res.status(201).send(await Product.create(req.body));
+    } else {
+      res.send(403);
     }
   } catch (err) {
     next(err);
@@ -48,6 +50,8 @@ router.put("/:id", requireToken, async (req, res, next) => {
     if (req.user.isAdmin) {
       const product = await Product.findByPk(req.params.id);
       res.send(await product.update(req.body));
+    } else {
+      res.send(403);
     }
   } catch (err) {
     next(err);
@@ -60,6 +64,8 @@ router.delete("/:id", requireToken, async (req, res, next) => {
       const product = await Product.findByPk(req.params.id);
       await product.destroy();
       res.send(product);
+    } else {
+      res.send(403);
     }
   } catch (err) {
     next(err);
