@@ -9,12 +9,12 @@ export const Home = (props) => {
   const dispatch = useDispatch();
   //Grabbing the products from the redux store
   const products = useSelector((state) => state.products);
-  
+
   useEffect(() => {
     //Dispatching the proucts to the readux store
     dispatch(fetchProducts());
   }, []);
-  
+
   const handleButton = () => {
     history.push("/products");
   };
@@ -22,8 +22,11 @@ export const Home = (props) => {
   return (
     <div>
       <h3>Emoji Emporium</h3>
-      <h5>The ONLY ecommerce shop {"(probably)"} where you can buy what's already on your phone!</h5>
-      <EmojiDisplay{...products[1080]}/>
+      <h5>
+        The ONLY ecommerce shop {"(probably)"} where you can buy what's already
+        on your phone!
+      </h5>
+      <EmojiDisplay {...products[1080]} />
       <button onClick={handleButton}>Shop Now</button>
       <h5>Featured Products</h5>
       <div>{/*  Yellow bar with icons here! */}</div>
@@ -51,6 +54,4 @@ export const Home = (props) => {
   );
 };
 
-
-
-export default Home
+export default Home;
