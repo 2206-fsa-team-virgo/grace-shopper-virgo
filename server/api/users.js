@@ -4,28 +4,38 @@ const {
 } = require("../db");
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+const requireToken = async (req, res, next) => {
   try {
-    //if(admin){
-    //  const users = await User.findAll()
-    //}
-    //else
-    const users = await User.findAll({
-      // explicitly select only the id and username fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ["id", "username"]
-    });
-    res.json(users);
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    req.user = user;
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+router.get("/", requireToken, async (req, res, next) => {
+  try {
+    if (req.user.isAdmin) {
+      const users = await User.findAll();
+      res.json(users);
+    } else {
+      res.sendStatus(404);
+    }
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/:userId", async (req, res, next) => {
+router.get("/:userId", requireToken, async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId);
-    res.status(200).send(user);
+    if (req.user.isAdmin) {
+      const user = await User.findByPk(req.params.userId);
+      res.status(200).send(user);
+    } else {
+      res.sendStatus(404);
+    }
   } catch (err) {
     next(err);
   }

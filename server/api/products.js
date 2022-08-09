@@ -1,8 +1,19 @@
 const router = require("express").Router();
 const {
-  models: { Product }
+  models: { Product, User }
 } = require("../db");
 module.exports = router;
+
+const requireToken = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    req.user = user;
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
 
 router.get("/", async (req, res, next) => {
   try {
@@ -22,28 +33,34 @@ router.get("/:productId", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", requireToken, async (req, res, next) => {
   try {
-    res.status(201).send(await Product.create(req.body));
+    if (req.user.isAdmin) {
+      res.status(201).send(await Product.create(req.body));
+    }
   } catch (err) {
     next(err);
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", requireToken, async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.id);
-    res.send(await product.update(req.body));
+    if (req.user.isAdmin) {
+      const product = await Product.findByPk(req.params.id);
+      res.send(await product.update(req.body));
+    }
   } catch (err) {
     next(err);
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", requireToken, async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.id);
-    await product.destroy();
-    res.send(product);
+    if (req.user.isAdmin) {
+      const product = await Product.findByPk(req.params.id);
+      await product.destroy();
+      res.send(product);
+    }
   } catch (err) {
     next(err);
   }
