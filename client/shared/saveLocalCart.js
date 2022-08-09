@@ -8,7 +8,7 @@ const saveLocalCart = (item) => {
   //If there is, parse the local storage string, and assign cart to parsed string (which is now the cart obj)
   cart = JSON.parse(localStorage.getItem("cart"));
   let updatedCart = { ...cart };
-  let keys = Object.keys(cart);
+  let keys = Object.keys(updatedCart);
 
   if (!keys.includes(item.id.toString())) {
     const itemObj = {
