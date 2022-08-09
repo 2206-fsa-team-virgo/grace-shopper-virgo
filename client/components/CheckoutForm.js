@@ -6,7 +6,7 @@ const Checkout = () => {
   return (
     <div>
       <div className="py-3 bg-warning">
-        <div class="container">
+        <div className="container">
           <h3>Checkout</h3>
         </div>
       </div>
