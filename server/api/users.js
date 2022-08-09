@@ -21,7 +21,7 @@ router.get("/", requireToken, async (req, res, next) => {
       const users = await User.findAll();
       res.json(users);
     } else {
-      res.sendStatus(404);
+      res.sendStatus(403);
     }
   } catch (err) {
     next(err);
@@ -34,7 +34,7 @@ router.get("/:userId", requireToken, async (req, res, next) => {
       const user = await User.findByPk(req.params.userId);
       res.status(200).send(user);
     } else {
-      res.sendStatus(404);
+      res.sendStatus(403);
     }
   } catch (err) {
     next(err);

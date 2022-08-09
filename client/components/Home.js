@@ -26,7 +26,7 @@ export const Home = (props) => {
         The ONLY ecommerce shop {"(probably)"} where you can buy what's already
         on your phone!
       </h5>
-      <EmojiDisplay {...products[1080]} />
+      <EmojiDisplay {...products[1079]} />
       <button onClick={handleButton}>Shop Now</button>
       <h5>Featured Products</h5>
       <div>{/*  Yellow bar with icons here! */}</div>
