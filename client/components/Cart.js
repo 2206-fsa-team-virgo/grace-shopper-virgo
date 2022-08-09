@@ -1,36 +1,81 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 export const Cart = (props) => {
-  let history = useHistory();
-  const { username } = props;
+  const [stateCart, setStateCart] = useState({});
 
-  const saveLocalCart = (item) => {
-    let cart;
-    if (localStorage.getItem("cart") === null) {
-      cart = [];
-    } else {
-      cart = JSON.parse(localStorage.getItem("cart"));
+  let history = useHistory();
+  // const { username } = props;
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  console.log("cart", cart);
+  let cartTotal = 0;
+
+  useEffect(() => {
+    setStateCart(cart);
+  }, []);
+  console.log("stateCart", stateCart);
+
+  const computeCartTotal = () => {
+    for (let id in cart) {
+      let subtotal = parseFloat(cart[id].price) * cart[id].qty;
+      cartTotal += subtotal;
     }
-    cart.push(item);
+  };
+  computeCartTotal();
+
+  // updates both local storage & local state carts
+  const updateCarts = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
+    setStateCart(cart);
+  };
+
+  const incrementFromCart = (id) => {
+    cart[id].qty++;
+    updateCarts();
+  };
+
+  const decrementFromCart = (id) => {
+    if (cart[id].qty > 0) {
+      cart[id].qty--;
+    }
+    updateCarts();
+  };
+
+  const removeItemFromCart = (id) => {
+    delete cart[id];
+    updateCarts();
   };
 
   return (
     <div>
-      <h3>A new New York</h3>
-      <button onClick={saveLocalCart("Happy Emoji")}>Shop Now</button>
-      {/* <h5>Consistent NYCconversations at the click of a button</h5>
-      <img src="https://hotemoji.com/images/dl/q/shocked-emoji-by-twitter.png" />
-      {products.map((product) => (
-        <div>
-          <div>Name: {product.name}</div>
-          <div>Price: ${product.price}</div>
-          <img src={product.img} />
-        </div>
-      ))}
-      <div> Yellow bar with icons here!</div> */}
+      <h2>Your Emoji Cart</h2>
+      <button onClick={() => updateCarts}>Refresh Cart</button>
+      {Object.values(cart).map((item, idx) => {
+        let subtotal = parseFloat(item.price) * item.qty;
+
+        let convertedPrice = Intl.NumberFormat("en-us", {
+          style: "currency",
+          currency: "USD",
+        }).format(subtotal);
+
+        return (
+          <div key={idx}>
+            <p>Name: {item.name}</p>
+            <p>Quantity: {item.qty}</p>
+            <p>Price: ${item.price}</p>
+            <p>{item.desc}</p>
+            <p>Subtotal: {convertedPrice}</p>
+            <button onClick={() => incrementFromCart(item.id)}>+1</button>
+            <button onClick={() => decrementFromCart(item.id)}>-1</button>
+            <button onClick={() => removeItemFromCart(item.id)}>
+              Remove from cart
+            </button>
+          </div>
+        );
+      })}
+      <h2>Cart Total: ${cartTotal}</h2>
+      <button onClick={() => history.push("/checkout")}>Checkout</button>
     </div>
   );
 };
