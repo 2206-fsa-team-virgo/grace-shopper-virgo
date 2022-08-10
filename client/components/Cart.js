@@ -1,6 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+
+const addCartItem = async (product) => {
+  await axios.post(`/api/${{/*SOMETHING*/}}/`, product)
+}
+
+const deleteCartItem = async (id) => {
+  await axios.delete(`/api/${{/*SOMETHING*/}}/:${id}`)
+}
+
+const updateCartItem = async (product) => {
+  await axios.put(`/api/${{/*SOMETHING*/}}/:${id}`, product)
+}
+
+
+
+
 
 export const Cart = (props) => {
   const [stateCart, setStateCart] = useState({});

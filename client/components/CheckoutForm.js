@@ -2,6 +2,23 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+const addCart = async (cart) => {
+  await axios.post(`/api/${{/*SOMETHING*/}}/`, cart)
+}
+
+
+//Do we need this?
+const deleteCart = async (id) => {
+  await axios.delete(`/api/${{/*SOMETHING*/}}/:${id}`)
+}
+
+
+//Do we need this? Probably not?
+const updateCart = async (cart) => {
+  await axios.put(`/api/${{/*SOMETHING*/}}/:${id}`, cart)
+}
+
+
 const Checkout = () => {
   let cart = JSON.parse(localStorage.getItem("cart"));
 
