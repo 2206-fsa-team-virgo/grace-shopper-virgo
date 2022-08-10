@@ -12,7 +12,7 @@ const deleteCartItem = async (id) => {
 }
 
 const updateCartItem = async (product) => {
-  await axios.put(`/api/${{/*SOMETHING*/}}/:${id}`, product)
+  await axios.put(`/api/${{/*SOMETHING*/}}/:${product.id}`, product)
 }
 
 export const Cart = (props) => {
@@ -46,6 +46,7 @@ export const Cart = (props) => {
   const incrementFromCart = (id) => {
     cart[id].qty++;
     updateCarts();
+    updateCartItem(cart[id])
   };
 
   const decrementFromCart = (id) => {
@@ -53,12 +54,15 @@ export const Cart = (props) => {
       cart[id].qty--;
     }
     updateCarts();
+    updateCartItem(cart[id])
   };
 
   const removeItemFromCart = (id) => {
     delete cart[id];
     updateCarts();
+    deleteCartItem(id)
   };
+  
 
   return (
     <div>
