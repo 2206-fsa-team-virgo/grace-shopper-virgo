@@ -1,7 +1,13 @@
+import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
-import { useSelector } from "react-redux";
+
+
+const fetchCart = async () => {
+  await axios.get(`/api/orders`);
+};
+
 /**
  * COMPONENT
  */
@@ -38,7 +44,7 @@ const mapLogin = (state) => {
   return {
     name: "login",
     displayName: "Login",
-    error: state.auth.error,
+    error: state.auth.error
   };
 };
 
@@ -46,7 +52,7 @@ const mapSignup = (state) => {
   return {
     name: "signup",
     displayName: "Sign Up",
-    error: state.auth.error,
+    error: state.auth.error
   };
 };
 
@@ -58,7 +64,9 @@ const mapDispatch = (dispatch) => {
       const email = evt.target.email.value;
       const password = evt.target.password.value;
       dispatch(authenticate(email, password, formName));
-    },
+      //Add to local storage, but re-arange data
+      fetchCart();
+    }
   };
 };
 

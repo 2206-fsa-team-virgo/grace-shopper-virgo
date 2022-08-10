@@ -1,3 +1,10 @@
+import { useSelector } from "react-redux";
+
+const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
+const addCartItem = async (item) => {
+  await axios.post(`/api/orders/`, item);
+};
+
 const saveLocalCart = (item) => {
   let cart;
   if (localStorage.getItem("cart") === null) {
@@ -17,7 +24,7 @@ const saveLocalCart = (item) => {
       name: item.name,
       desc: item.desc,
       price: item.price,
-      onSale: item.onSale,
+      onSale: item.onSale
     };
 
     updatedCart[item.id] = itemObj;
@@ -27,6 +34,8 @@ const saveLocalCart = (item) => {
 
   //Update the cart on the web's local storage
   localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+  if (isLoggedIn) addCartItem(updatedCart[item.id]);
 };
 
 export default saveLocalCart;

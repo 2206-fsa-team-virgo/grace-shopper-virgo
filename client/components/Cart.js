@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
+
+const deleteCartItem = async (id) => {
+  await axios.delete(`/api/orders/:${id}`);
+};
+
+const updateCartItem = async (product) => {
+  await axios.put(`/api/orders/:${product.id}`, product);
+};
 
 export const Cart = (props) => {
   const [stateCart, setStateCart] = useState({});
@@ -33,6 +43,7 @@ export const Cart = (props) => {
   const incrementFromCart = (id) => {
     cart[id].qty++;
     updateCarts();
+    if (isLoggedIn) updateCartItem(cart[id]);
   };
 
   const decrementFromCart = (id) => {
@@ -40,11 +51,13 @@ export const Cart = (props) => {
       cart[id].qty--;
     }
     updateCarts();
+    if (isLoggedIn) updateCartItem(cart[id]);
   };
 
   const removeItemFromCart = (id) => {
     delete cart[id];
     updateCarts();
+    if (isLoggedIn) deleteCartItem(id);
   };
 
   return (
@@ -56,7 +69,7 @@ export const Cart = (props) => {
 
         let convertedPrice = Intl.NumberFormat("en-us", {
           style: "currency",
-          currency: "USD",
+          currency: "USD"
         }).format(subtotal);
 
         return (
