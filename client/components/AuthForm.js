@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
-
+import { useSelector } from "react-redux";
 /**
  * COMPONENT
  */
@@ -27,7 +27,7 @@ const AuthForm = (props) => {
           <button type="submit">{displayName}</button>
         </div>
         {error && error.response && (
-          <div className="text-red-500"> {error.response.data} </div>
+          <div className="text-red-500"> {error.response.data} ;</div>
         )}
       </form>
     </div>

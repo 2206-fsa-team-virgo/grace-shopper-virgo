@@ -21,8 +21,8 @@ export const me = () => async (dispatch) => {
   if (token) {
     const res = await axios.get("/auth/me", {
       headers: {
-        authorization: token
-      }
+        authorization: token,
+      },
     });
     return dispatch(setAuth(res.data));
   }
@@ -36,6 +36,7 @@ export const authenticate = (email, password, method) => async (dispatch) => {
     });
     window.localStorage.setItem(TOKEN, res.data.token);
     dispatch(me());
+    history.push("/home");
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
   }
@@ -49,7 +50,7 @@ export const logout = () => {
   // dispatch(_logOut());
   return {
     type: SET_AUTH,
-    auth: {}
+    auth: {},
   };
 };
 
