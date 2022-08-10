@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
+import axios from "axios";
 
 const closeCart = async (cart) => {
   await axios.put(`/api/orders/close`, cart);
 };
 
 const Checkout = () => {
+  const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
   let cart = JSON.parse(localStorage.getItem("cart"));
 
   let history = useHistory();
@@ -88,7 +89,7 @@ const Checkout = () => {
               let subtotal = parseFloat(item.price) * item.qty;
               let convertedPrice = Intl.NumberFormat("en-us", {
                 style: "currency",
-                currency: "USD"
+                currency: "USD",
               }).format(subtotal);
               totalPrice += subtotal;
               return (

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
 
 const deleteCartItem = async (id) => {
   await axios.delete(`/api/orders/:${id}`);
@@ -13,6 +12,7 @@ const updateCartItem = async (product) => {
 };
 
 export const Cart = (props) => {
+  const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
   const [stateCart, setStateCart] = useState({});
 
   let history = useHistory();
@@ -63,32 +63,38 @@ export const Cart = (props) => {
   return (
     <div>
       <h2>Your Emoji Cart</h2>
-      <button onClick={() => updateCarts}>Refresh Cart</button>
-      {Object.values(cart).map((item, idx) => {
-        let subtotal = parseFloat(item.price) * item.qty;
 
-        let convertedPrice = Intl.NumberFormat("en-us", {
-          style: "currency",
-          currency: "USD"
-        }).format(subtotal);
+      {!cart ? (
+        <h2>Cart is empty.</h2>
+      ) : (
+        <div>
+          {Object.values(cart).map((item, idx) => {
+            let subtotal = parseFloat(item.price) * item.qty;
 
-        return (
-          <div key={idx}>
-            <p>Name: {item.name}</p>
-            <p>Quantity: {item.qty}</p>
-            <p>Price: ${item.price}</p>
-            <p>{item.desc}</p>
-            <p>Subtotal: {convertedPrice}</p>
-            <button onClick={() => incrementFromCart(item.id)}>+1</button>
-            <button onClick={() => decrementFromCart(item.id)}>-1</button>
-            <button onClick={() => removeItemFromCart(item.id)}>
-              Remove from cart
-            </button>
-          </div>
-        );
-      })}
-      <h2>Cart Total: ${cartTotal}</h2>
-      <button onClick={() => history.push("/checkout")}>Checkout</button>
+            let convertedPrice = Intl.NumberFormat("en-us", {
+              style: "currency",
+              currency: "USD",
+            }).format(subtotal);
+
+            return (
+              <div key={idx}>
+                <p>Name: {item.name}</p>
+                <p>Quantity: {item.qty}</p>
+                <p>Price: ${item.price}</p>
+                <p>{item.desc}</p>
+                <p>Subtotal: {convertedPrice}</p>
+                <button onClick={() => incrementFromCart(item.id)}>+1</button>
+                <button onClick={() => decrementFromCart(item.id)}>-1</button>
+                <button onClick={() => removeItemFromCart(item.id)}>
+                  Remove from cart
+                </button>
+              </div>
+            );
+          })}
+          <h2>Cart Total: ${cartTotal}</h2>
+          <button onClick={() => history.push("/checkout")}>Checkout</button>
+        </div>
+      )}
     </div>
   );
 };
