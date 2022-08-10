@@ -4,15 +4,15 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const addCartItem = async (product) => {
-  await axios.post(`/api/${{/*SOMETHING*/}}/`, product)
+  await axios.post(`/api/orders/`, product)
 }
 
 const deleteCartItem = async (id) => {
-  await axios.delete(`/api/${{/*SOMETHING*/}}/:${id}`)
+  await axios.delete(`/api/orders/:${id}`)
 }
 
 const updateCartItem = async (product) => {
-  await axios.put(`/api/${{/*SOMETHING*/}}/:${product.id}`, product)
+  await axios.put(`/api/orders/:${product.id}`, product)
 }
 
 export const Cart = (props) => {
