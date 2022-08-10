@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
 
 const closeCart = async (cart) => {
   await axios.put(`/api/orders/close`, cart);
@@ -15,8 +16,7 @@ const Checkout = () => {
     history.push("/thankyou");
     cart = {};
     localStorage.setItem("cart", JSON.stringify(cart));
-    //If logged in?
-    closeCart(cart);
+    if (isLoggedIn) closeCart(cart);
   };
   return (
     <div>

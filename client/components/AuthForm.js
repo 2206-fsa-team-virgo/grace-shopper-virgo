@@ -2,8 +2,8 @@ import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import { authenticate } from "../store";
-import { useSelector } from "react-redux";
-//Is logged in?
+
+
 const fetchCart = async () => {
   await axios.get(`/api/orders`);
 };
@@ -64,7 +64,7 @@ const mapDispatch = (dispatch) => {
       const email = evt.target.email.value;
       const password = evt.target.password.value;
       dispatch(authenticate(email, password, formName));
-      //If logged in
+      //Add to local storage, but re-arange data
       fetchCart();
     }
   };

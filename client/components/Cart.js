@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+const isLoggedIn = !!useSelector((reduxState) => reduxState.auth.id);
 
 const deleteCartItem = async (id) => {
   await axios.delete(`/api/orders/:${id}`);
@@ -42,8 +43,7 @@ export const Cart = (props) => {
   const incrementFromCart = (id) => {
     cart[id].qty++;
     updateCarts();
-    //Is logged in?
-    updateCartItem(cart[id]);
+    if (isLoggedIn) updateCartItem(cart[id]);
   };
 
   const decrementFromCart = (id) => {
@@ -51,15 +51,13 @@ export const Cart = (props) => {
       cart[id].qty--;
     }
     updateCarts();
-    //Is logged in?
-    updateCartItem(cart[id]);
+    if (isLoggedIn) updateCartItem(cart[id]);
   };
 
   const removeItemFromCart = (id) => {
     delete cart[id];
     updateCarts();
-    //Is logged in?
-    deleteCartItem(id);
+    if (isLoggedIn) deleteCartItem(id);
   };
 
   return (
