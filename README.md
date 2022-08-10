@@ -5,45 +5,20 @@ Evan Forde Barden
 Harrison J.K.
 Kevin Zhang
 
-## Goals
+## Welcome! 
 
-Make the best e-commerce site since Amazon
-Work amazingly well as a team
+Lucky you! You've just stumbled across the best emoji e-commerce website on the internet! 🥳
 
 ## Setup
 
-To use this as boilerplate, you'll need to take the following steps:
+To fetch our app, Fork and Clone this repo!
 
-- Don't fork or clone this repo! Instead, create a new, empty
-  directory on your machine and `git init` (or create an empty repo on
-  Github and clone it to your local machine)
-
-- Now you will have to add the fs-app-template as a remote and merge it into your own repository.
+Once this is done, setup your database by running the following commands:
 
 ```
-git remote add boilermaker git@github.com:FullstackAcademy/fs-app-template.git
-git fetch boilermaker
-git merge boilermaker/main
-git branch -m master main
+createdb grace-shopper-virgo
+npm install
 ```
-
-## Customize
-
-Now that you've got the code, follow these steps to get acclimated:
-
-- Update project name and description in `package.json`
-- `npm install`
-- Create two postgres databases (`MY_APP_NAME` should match the `name`
-  parameter in `package.json`):
-- These commands will create both your **development** and **test** databases
-
-```
-createdb <YOUR APP NAME HERE FROM package.json>
-createdb <YOUR APP NAME HERE FROM package.json>-test
-```
-
-- By default, running `npm test` will use your test database, while
-  regular development uses development database
 
 ## Start
 
@@ -63,7 +38,7 @@ Sync and seed your database by running `npm run seed`. Running `npm run start:de
 
 - **If you are creating a new app...**
 
-  1.  `heroku create` or `heroku create your-app-name` if you have a
+  1.  `heroku create` or `heroku create grace-shopper-virgo` if you have a
       name in mind.
   2.  `heroku config:set JWT=<your secret here!>` to set a secret for JWT signing
 
@@ -78,7 +53,7 @@ Database Setup
 
 - **If you already have a Heroku app...**
 
-  1.  `heroku git:remote your-app-name` You'll need to be a
+  1.  `heroku git:remote grace-shopper-virgo` You'll need to be a
       collaborator on the app.
 
 Now, you should be deployed!
