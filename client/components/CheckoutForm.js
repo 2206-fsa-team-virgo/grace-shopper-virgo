@@ -28,6 +28,7 @@ const Checkout = () => {
     history.push("/thankyou");
     cart = {};
     localStorage.setItem("cart", JSON.stringify(cart));
+    addCart(cart)
   };
   return (
     <div>

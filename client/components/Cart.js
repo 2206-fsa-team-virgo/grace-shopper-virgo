@@ -15,10 +15,6 @@ const updateCartItem = async (product) => {
   await axios.put(`/api/${{/*SOMETHING*/}}/:${id}`, product)
 }
 
-
-
-
-
 export const Cart = (props) => {
   const [stateCart, setStateCart] = useState({});
 
