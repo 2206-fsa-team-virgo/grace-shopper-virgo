@@ -1,3 +1,7 @@
+const addCartItem = async (item) => {
+  await axios.post(`/api/orders/`, item)
+}
+
 const saveLocalCart = (item) => {
   let cart;
   if (localStorage.getItem("cart") === null) {
@@ -25,8 +29,12 @@ const saveLocalCart = (item) => {
 
   updatedCart[item.id].qty++;
 
+
+
   //Update the cart on the web's local storage
   localStorage.setItem("cart", JSON.stringify(updatedCart));
+  //If Logged in
+  addCartItem(updatedCart[item.id])
 };
 
 export default saveLocalCart;

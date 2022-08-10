@@ -3,17 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const addCartItem = async (product) => {
-  await axios.post(`/api/orders/`, product)
-}
-
 const deleteCartItem = async (id) => {
-  await axios.delete(`/api/orders/:${id}`)
-}
+  await axios.delete(`/api/orders/:${id}`);
+};
 
 const updateCartItem = async (product) => {
-  await axios.put(`/api/orders/:${product.id}`, product)
-}
+  await axios.put(`/api/orders/:${product.id}`, product);
+};
 
 export const Cart = (props) => {
   const [stateCart, setStateCart] = useState({});
@@ -46,7 +42,8 @@ export const Cart = (props) => {
   const incrementFromCart = (id) => {
     cart[id].qty++;
     updateCarts();
-    updateCartItem(cart[id])
+    //Is logged in?
+    updateCartItem(cart[id]);
   };
 
   const decrementFromCart = (id) => {
@@ -54,15 +51,16 @@ export const Cart = (props) => {
       cart[id].qty--;
     }
     updateCarts();
-    updateCartItem(cart[id])
+    //Is logged in?
+    updateCartItem(cart[id]);
   };
 
   const removeItemFromCart = (id) => {
     delete cart[id];
     updateCarts();
-    deleteCartItem(id)
+    //Is logged in?
+    deleteCartItem(id);
   };
-  
 
   return (
     <div>
@@ -73,7 +71,7 @@ export const Cart = (props) => {
 
         let convertedPrice = Intl.NumberFormat("en-us", {
           style: "currency",
-          currency: "USD",
+          currency: "USD"
         }).format(subtotal);
 
         return (
